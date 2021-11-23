@@ -11,7 +11,7 @@ class Game
         ~Game() {};
 
         // simply set the running variable to true
-        void init();
+        bool init(const char* title, int xpos, int ypos, int width, int height, int flags);
 
         void render();
         void update();
@@ -25,7 +25,7 @@ class Game
 
         SDL_Window* m_pWindow;
         SDL_Renderer* m_pRenderer;
-        
+
         bool m_bRunning;
 };
 

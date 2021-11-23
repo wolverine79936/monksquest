@@ -1,3 +1,4 @@
+#include <iostream>
 #include "SDL2/SDL.h"
 #include "../hdrs/Game.h"
 
@@ -45,17 +46,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     }
 
     std::cout << "init success\n";
-    m_bRunning = true; // everything init'd successfully.
-    start the main loop;
+    m_bRunning = true; // everything init'd successfully, start the main loop;
 
     return true;
 }
 
 int main(int argc, char* argv[])
 {
-    g_game = new Game();
+    /* g_game = new Game();
 
-    g_game->init("Monk's Quest", 100, 100, 640, 480, 0);
+     g_game->init("Monk's Quest", 100, 100, 640, 480, 0);
 
     while(g_game->running())
     {
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
         g_game->update();
         g_game->render();
     }
-    g_game->clean();
-
+     g_game->clean();
+*/
     return 0;
 }
