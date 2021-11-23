@@ -1,46 +1,69 @@
 #include "SDL2/SDL.h"
 #include "../hdrs/Game.h"
+
 // our Game object
 Game* g_game = 0;
 
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
 
-int main(int argc, char* args[])
+bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
-    // Let's initialize SDL
-    if(SDL_Init(SDL_INIT_EVERYTHING) >= 0)
+    // attempt to initalize SDL
+    if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
-        // This checks that we succesfully created our window:
-        g_pWindow = SDL_CreateWindow("Monk's Quest", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
+        std::cout << "SDL init success\n";
+        // init the window
+        m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
-        // If we succesfully created our renderer within the window:
-        if(g_pWindow != 0)
+        if(m_pWindow != 0) // window init success
         {
-            g_pRenderer = SDL_CreateRenderer(g_pWindow, -1, 0);
+            std::cout << "window creation success\n";
+            m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
+
+            if(m_pRenderer != 0) // renderer init success
+            {
+                std::cout << "renderer creation success\n";
+                SDL_SetRenderDrawColor(m_pRenderer,255,255,255,255);
+            }
+            else
+            {
+                std::cout << "renderer init fail\n";
+                return false; // renderer init fail
+            }
+        }
+        else
+        {
+            std::cout << "window init fail\n";
+            return false; // window init fail
         }
     }
     else
     {
-        return 1; // For some reason, we couldn't initialize SDL.
+        std::cout << "SDL init fail\n";
+        return false; // SDL init fail
     }
 
-    // Everything has succeeded, so let draw the window finally.
+    std::cout << "init success\n";
+    m_bRunning = true; // everything init'd successfully.
+    start the main loop;
 
-    // We'll set the renderer background to black. // This function expects RGBa as color values.
-    SDL_SetRenderDrawColor(g_pRenderer, 0, 0, 0, 255);
+    return true;
+}
 
-    // Now let's clear the window to black.
-    SDL_RenderClear(g_pRenderer);
+int main(int argc, char* argv[])
+{
+    g_game = new Game();
 
-    // And now to show the window.
-    SDL_RenderPresent(g_pRenderer);
+    g_game->init("Monk's Quest", 100, 100, 640, 480, 0);
 
-    // And now to set a delay before quitting
-    SDL_Delay(10000);
-
-    // Finally, to clean up SDL
-    SDL_Quit();
+    while(g_game->running())
+    {
+        g_game->handleEvents();
+        g_game->update();
+        g_game->render();
+    }
+    g_game->clean();
 
     return 0;
 }
