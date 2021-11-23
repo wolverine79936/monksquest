@@ -1,4 +1,7 @@
 #include "SDL2/SDL.h"
+#include "../hdrs/Game.h"
+// our Game object
+Game* g_game = 0;
 
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
