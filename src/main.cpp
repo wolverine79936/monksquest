@@ -51,9 +51,41 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
     return true;
 }
 
+void Game::render()
+{
+    SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
+
+    SDL_RenderPresent(m_pRenderer); // draw to the screen
+}
+
+void Game::handleEvents()
+{
+    SDL_Event event;
+    if(SDL_PollEvent(&event))
+    {
+        switch (event.type)
+        {
+            case SDL_QUIT:
+                m_bRunning = false;
+            break;
+
+            default:
+            break;
+        }
+    }
+}
+
+void Game::clean()
+{
+    std::cout << "cleaning game\n";
+    SDL_DestroyWindow(m_pWindow);
+    SDL_DestroyRenderer(m_pRenderer);
+    SDL_Quit();
+}
+
 int main(int argc, char* argv[])
 {
-    /* g_game = new Game();
+     g_game = new Game();
 
      g_game->init("Monk's Quest", 100, 100, 640, 480, 0);
 
@@ -64,6 +96,6 @@ int main(int argc, char* argv[])
         g_game->render();
     }
      g_game->clean();
-*/
+
     return 0;
 }
