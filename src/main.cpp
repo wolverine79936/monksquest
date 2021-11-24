@@ -8,8 +8,15 @@ Game* g_game = 0;
 SDL_Window* g_pWindow = 0;
 SDL_Renderer* g_pRenderer = 0;
 
-bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
+bool Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+    int flags = 0;
+
+    if(fullscreen)
+    {
+        flags = SDL_WINDOW_FULLSCREEN;
+    }
+
     // attempt to initalize SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
@@ -87,7 +94,7 @@ int main(int argc, char* argv[])
 {
      g_game = new Game();
 
-     g_game->init("Monk's Quest", 100, 100, 640, 480, 0);
+     g_game->init("Monk's Quest", 100, 100, 640, 480, false);
 
     while(g_game->running())
     {
