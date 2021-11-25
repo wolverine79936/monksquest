@@ -1,6 +1,6 @@
 #OBJS specifies which files to compile as part of the
 #monksquest project.
-OBJS = src/main.cpp hdrs/Game.h
+OBJS = src/main.cpp src/Game.cpp hdrs/Game.h
 
 #OBJ_NAME specifies the name of our final executable
 OBJ_NAME = monksquest

@@ -9,4 +9,3 @@ Monk's Quest is a parody on King's Quest from 1984 but is more spritually orient
 
 ### Personal Notes:
 - I personally refuse to have anything to do with Windows anymore. Windows is an evil environment in which programming in C, C++ and pretty much any other low level language is a near impossibility. Just to create a window in Windows is a total nightmare. Therefore, all of my code for this game will be aimed strictly for Linux.
-- I have no clue whatsoever what would be needed for making this game compatible with Mac, so here is the branch for Mac and it is open for development. :)
